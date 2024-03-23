@@ -14,14 +14,13 @@
     192.168.1.9 mydomain2.lan
     ```
 
-## Secrets
-- Current configuration uses [docker
-  secret](https://docs.docker.com/engine/swarm/secrets/) for webpassword
-- Secrets are automatically created by docker compose. The only thing that
-  needs to be done is to create the `webpass.txt` file with the contents:
-```
-[web_password]
-```
+## Webpass
+- Current configuration uses `WEBPASSWORD` environment variable
+    - set variable in `.env` file:
+    ```
+    # .env file
+    WEBPASSWORD=[password]
+    ```
 
 ## Static IP for VM and Proxmox Host
 - Set static IPs for Proxmox Host and VM that runs DHCP server, since they need
@@ -40,3 +39,13 @@ netmask 255.255.255.0
 gateway [router IP]
 dns-nameservers [dns/pi-hole IP]
 ```
+
+## Secrets [DEPRECATED]
+- Old configuration used [docker
+  secret](https://docs.docker.com/engine/swarm/secrets/) for webpassword
+- Secrets are automatically created by docker compose. The only thing that
+  needs to be done is to create the `webpass.txt` file with the contents:
+```
+[web_password]
+```
+

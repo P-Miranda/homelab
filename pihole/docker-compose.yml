@@ -10,7 +10,7 @@ services:
     environment:
       TZ: 'Europe/Lisbon'
       FTLCONF_LOCAL_IPV4: '192.168.1.11'
-      WEBPASSWORD_FILE: /run/secrets/web_pass
+      WEBPASSWORD: "${WEBPASSWORD}"
       PIHOLE_DNS_: 1.1.1.1;1.0.0.1
       DHCP_ACTIVE: true
       DHCP_START: '192.168.1.150'
@@ -29,7 +29,3 @@ services:
     cap_add:
       - NET_ADMIN  # Required only if you are using Pi-hole as your DHCP server
     restart: unless-stopped
-
-secrets:
-  web_pass:
-    file: webpass.txt
