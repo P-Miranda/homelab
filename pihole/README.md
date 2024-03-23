@@ -3,6 +3,17 @@
 - [Pi-hole documentation](https://docs.pi-hole.net/)
 - [Pi-hole Docker](https://github.com/pi-hole/docker-pi-hole)
 
+## Local DNS Records
+- Add local DNS records (for example for device ips) in
+  `./etc-pihole/custom.list`
+    - example:
+    ```
+    # ./etc-pihole/custom.list
+    [IP] [domain]
+    192.168.1.8 mydomain1.lan
+    192.168.1.9 mydomain2.lan
+    ```
+
 ## Secrets
 - Current configuration uses [docker
   secret](https://docs.docker.com/engine/swarm/secrets/) for webpassword
@@ -19,8 +30,10 @@
 - Edit the `/etc/interfaces` file:
 ```
 # replace dhcp iface
+allow-hotplug eth0
 iface eth0 inet dhcp
 # static configuration
+auto eth0
 iface eth0 inet static
 address [static IP]
 netmask 255.255.255.0
