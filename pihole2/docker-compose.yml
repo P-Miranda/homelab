@@ -1,0 +1,31 @@
+---
+# More info at https://github.com/pi-hole/docker-pi-hole/ and
+# https://docs.pi-hole.net/
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    # For DHCP it is recommended to remove ports and add: network_mode: "host"
+    network_mode: host
+    environment:
+      TZ: 'Europe/Lisbon'
+      FTLCONF_LOCAL_IPV4: '192.168.1.35'
+      WEBPASSWORD: "${WEBPASSWORD}"
+      PIHOLE_DNS_: 1.1.1.1;1.0.0.1
+      DHCP_ACTIVE: true
+      DHCP_START: '192.168.1.100'
+      DHCP_END: '192.168.1.149'
+      DHCP_ROUTER: '192.168.1.254'
+      DHCP_LEASETIME: 12
+      DHCP_DOMAIN: 'lan'
+      DHCP_rapid_commit: true
+      DNSMASQ_LISTENING: 'local'
+      WEBTHEME: "default-dark"
+    # Volumes store your data between container upgrades
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN  # Required only if you are using Pi-hole as your DHCP server
+    restart: unless-stopped
