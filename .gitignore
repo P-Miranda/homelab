@@ -2,3 +2,4 @@ pihole2/etc-dnsmasq.d/*
 pihole2/etc-pihole/*
 */.env
 ddns/duck.log
+*/.restic-pw

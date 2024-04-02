@@ -9,7 +9,7 @@ Current solution uses:
   storage providers
 - cron: for periodic backup execution
 
-## Setup
+## NAS Mount Setup
 - install `cifs-utils`: `sudo apt update; sudo apt install cifs-utils`
 Mount NAS storage as network mount
 - create `$HOME/.nas_credentials` file with correct user credentials:
@@ -30,3 +30,43 @@ password=[password]
     ```
     sudo chown [user]:[group] /path/to/mount
     ```
+
+## Restic 
+
+### Installation
+- install `bzip2`:
+```bash
+sudo apt update
+sudo apt install bzip2
+```
+- check `restic_install.sh` script
+    - might need to update `VERSION` and `INSTALL_DIR` variables
+- run script:
+```bash
+./restic_install.sh
+# insert sudo password
+```
+- check restic and try to update:
+```bash
+restic version
+restic self-update
+```
+
+### Initial Setup
+- copy `.env.example` to `.env` and edit accordingly:
+```bash
+cp .env.example .env
+```
+- create `.restic-pw` file with repository password
+- run `restic_setup_repo.sh` script:
+```bash
+./restic_setup_repo.sh
+```
+
+### Setup Cron job
+Edit crontab: `crontab -e`
+Add new cronjob:
+```
+0 3 * * * /path/to/homelab/backups/restic_backup.sh >/dev/null 2>&1
+```
+- Note: cron job configuration to run daily at 03:00
