@@ -14,24 +14,24 @@ fi
 GOMAXPROCS=1
 
 # backup
-restic backup \
+${RESTIC_CMD} backup \
     -p $RESTIC_PASSWORD_FILE \
     --repo $RESTIC_REPO_PATH --verbose \
     --compression $RESTIC_COMPRESSION \
     --exclude-file $RESTIC_EXCLUDE_FILE \
-    --files-from $RESTIC_INCLUDE_FILE > $RESTIC_LOG
+    --files-from $RESTIC_INCLUDE_FILE > $RESTIC_LOG 2>&1
 
 # forget + prune
-restic forget \
+${RESTIC_CMD} forget \
     -p $RESTIC_PASSWORD_FILE \
     --repo $RESTIC_REPO_PATH --verbose \
     --keep-daily 3 \
     --keep-weekly 2 \
     --keep-monthly 1 \
-    --prune >> $RESTIC_LOG
+    --prune >> $RESTIC_LOG 2>&1
 
 # check
-restic check \
+${RESTIC_CMD} check \
     -p $RESTIC_PASSWORD_FILE \
     --repo $RESTIC_REPO_PATH --verbose \
-    --read-data >> $RESTIC_LOG
+    --read-data >> $RESTIC_LOG 2>&1

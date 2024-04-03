@@ -12,13 +12,13 @@ else
 fi
 
 # check for initialized repo
-if restic -r $RESTIC_REPO_PATH cat config; then
+if ${RESTIC_CMD} -r $RESTIC_REPO_PATH cat config; then
     echo "Repo already initialized"
     exit 0
 else
     echo "Initializing new repo..."
     # initialize repo
-    restic init \
+    ${RESTIC_CMD} init \
         -p $RESTIC_PASSWORD_FILE --verbose \
         --repo $RESTIC_REPO_PATH
     echo "Repository initialized at $RESTIC_REPO_PATH"
