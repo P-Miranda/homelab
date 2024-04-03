@@ -27,8 +27,9 @@ password=[password]
 - `noauto` makes ignoring mounting with `sudo mount -a`
     - reboot machine to get new mounts
 - it may be necessary to update ownership of new mount folders, update with:
-    ```
-    sudo chown [user]:[group] /path/to/mount
+    ```bash
+    sudo mkdir -p /media/[mount-folder]
+    sudo chown [user]:[group] /media/[mount-folder]
     ```
 
 ## Restic 
