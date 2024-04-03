@@ -71,3 +71,47 @@ Add new cronjob:
 0 3 * * * /path/to/homelab/backups/restic_backup.sh >/dev/null 2>&1
 ```
 - Note: cron job configuration to run daily at 03:00
+
+## Rclone
+
+### Installation
+- Install the latest version:
+```bash
+# NOTE: need to install one of: unzip/7z/busybox
+sudo apt update && sudo apt install unzip
+sudo -v ; curl https://rclone.org/install.sh | sudo bash
+```
+
+### Initial Setup
+- Create backblaze B2 bucket
+- Follow rclone instructions from [documentation](https://rclone.org/b2/)
+    - Optionally: get `rclone.config` file from some backup
+
+### Sync remote
+```bash
+./rclone_sync.sh
+```
+
+### Setup Cron job
+Edit crontab: `crontab -e`
+Add new cronjob:
+```
+0 4 * * * /path/to/homelab/backups/rclone_sync.sh >/dev/null 2>&1
+```
+- Note: cron job configuration to run daily at 04:00
+
+## Global Cron job
+The `cron_backup.sh` script runs restic backup followed by rclone sync
+Edit crontab: `crontab -e`
+Add new cronjob:
+```
+0 3 * * * /path/to/homelab/backups/cron_backup.sh >/dev/null 2>&1
+```
+- Note: cron job configuration to run daily at 04:00
+
+## Recovery
+- Check some examples on how to recover backed up data:
+    - `rclone_recover.sh`: recover data from remote backup to local restic
+      repository
+    - `restic_recover.sh`: restore lastest snapshot from restic repository to
+      specified target directory

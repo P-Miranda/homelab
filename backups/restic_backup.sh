@@ -11,7 +11,7 @@ else
   exit 1
 fi
 
-GOMAXPROCS=1
+GOMAXPROCS=4
 
 # backup
 ${RESTIC_CMD} backup \
