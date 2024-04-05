@@ -1,5 +1,10 @@
+*/.env
+backups/*.log
+backups/.restic-pw
+
+ddns/duck.log
+
+gotify/gotify_data/*
+
 pihole2/etc-dnsmasq.d/*
 pihole2/etc-pihole/*
-*/.env
-ddns/duck.log
-*/.restic-pw
