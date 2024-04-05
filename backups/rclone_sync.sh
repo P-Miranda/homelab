@@ -18,7 +18,36 @@ B2_REMOTE=Restic-B2-Crypt:
 # --bwlimit UPLOAD:DOWNLOAD limit upload and download speeds
 RCLONE_FLAGS='--progress --fast-list --transfers=32 --bwlimit=75M'
 
+SUCCESS=1
+check_command() {
+    RETVAL=$?
+    if [ $RETVAL -ne 0 ]
+    then
+        SUCCESS=0
+    fi
+}
+
 # RClone Sync command
 rclone $RCLONE_FLAGS sync $LOCAL_BACKUP_DIR $B2_REMOTE > $RCLONE_LOG 2>&1
+check_command
 echo "Restic Offsite Backup complete with size:" >> $RCLONE_LOG 2>&1
 rclone size $B2_REMOTE >> $RCLONE_LOG 2>&1
+check_command
+
+#
+# Gotify notification
+#
+if [ $SUCCESS -eq 1 ]
+then
+    MESSAGE="Sync successful"
+else
+    MESSAGE="Sync failed"
+fi
+
+TITLE="RClone Sync"
+PRIORITY=7
+URL="http://${GOTIFY_IP}:${GOTIFY_PORT}/message?token=${GOTIFY_RCLONE_APPTOKEN}"
+
+curl -s -S --data \
+    '{"message": "'"${MESSAGE}"'", "title": "'"${TITLE}"'", "priority":'"${PRIORITY}"', "extras": {"client::display": {"contentType": "text/markdown"}}}' \
+    -H 'Content-Type: application/json' "$URL"
