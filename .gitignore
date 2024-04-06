@@ -8,3 +8,5 @@ gotify/gotify_data/*
 
 pihole2/etc-dnsmasq.d/*
 pihole2/etc-pihole/*
+
+uptime-kuma/uptime-kuma-data/*

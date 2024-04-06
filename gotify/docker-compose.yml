@@ -1,6 +1,7 @@
 ---
 services:
   gotify:
+    container_name: gotify
     image: gotify/server
     ports:
       - 8080:80
@@ -9,3 +10,4 @@ services:
       - GOTIFY_DEFAULTUSER_PASS=${ADMIN_PASSWORD}
     volumes:
       - "./gotify_data:/app/data"
+    restart: unless-stopped
