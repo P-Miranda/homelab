@@ -1,5 +1,6 @@
 192.168.1.10 proxmox.lan
 192.168.1.11 network.lan
 192.168.1.12 main-vm0.lan
+193.168.1.15 frigate.lan
 192.168.1.33 nas.lan
 192.168.1.35 rpi.lan
