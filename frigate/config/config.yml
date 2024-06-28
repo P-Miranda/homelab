@@ -1,0 +1,92 @@
+mqtt:
+  enabled: False
+
+cameras:
+  camera_0:
+    enabled: True
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.20:554/Streaming/Channels/102/
+
+          roles:
+            - detect
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.20:554/Streaming/Channels/101/
+          roles:
+            - record
+      hwaccel_args: preset-nvidia-h264
+  camera_1:
+    enabled: True
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.21:554/Streaming/Channels/102/
+          roles:
+            - detect
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.21:554/Streaming/Channels/101/
+          roles:
+            - record
+      hwaccel_args: preset-nvidia-h264
+  camera_2:
+    enabled: True
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.22:554/Streaming/Channels/102/
+          roles:
+            - detect
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.22:554/Streaming/Channels/101/
+          roles:
+            - record
+      hwaccel_args: preset-nvidia-h264
+  attic_camera:
+    enabled: True
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.23:554/Streaming/Channels/102/
+          roles:
+            - detect
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.23:554/Streaming/Channels/101/
+          roles:
+            - record
+      hwaccel_args: preset-nvidia-h264
+
+detectors:
+  tensorrt:
+    type: tensorrt
+    device: 0 #This is the default, select the first GPU
+
+record:
+  enabled: True
+  retain:
+    days: 3
+    mode: all
+  events:
+    objects:
+      - person
+      - bicycle
+      - car
+      - motorcycle
+      - dog
+      - hat
+      - backpack
+      - umbrella
+      - handbag
+      - suitcase
+    retain:
+      default: 30
+      mode: motion
+
+snapshots:
+  enabled: True
+
+timestamp_style:
+  position: "bl" # bottom left
+  format: "%Y/%m/%d - %H:%M:%S" # Year/Month/Day - Hour:Min:Sec
+
+model:
+  path: /config/model_cache/tensorrt/yolov7-320.trt
+  input_tensor: nchw
+  input_pixel_format: rgb
+  width: 320
+  height: 320
+
+birdseye:
+  mode: continuous # all cameras, always
