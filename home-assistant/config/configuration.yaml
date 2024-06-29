@@ -1,0 +1,6 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+recorder:
+  # NOTE: must match the homeassistant-db credentials in docker-compose.yml
+  db_url: postgresql://HA-DB-user:{HA_BD_PASSWORD}@homeassistant-db/homeassistant-db
