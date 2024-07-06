@@ -15,3 +15,4 @@ mosquitto_passwd -c /mosquitto/config/pwfile [user]
 # rewrite password
 # NOTE if you get a warning, change pwfile permissions to root:root
 ```
+4. Reboot docker for new user to apply
