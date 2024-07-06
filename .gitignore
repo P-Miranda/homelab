@@ -6,6 +6,8 @@ ddns/duck.log
 
 gotify/gotify_data/*
 
+mosquitto/config/pwfile
+
 pihole2/etc-dnsmasq.d/*
 pihole2/etc-pihole/*
 
