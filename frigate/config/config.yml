@@ -5,7 +5,7 @@ mqtt:
   password: ${FRIGATE_MQTT_PASSWORD}
 
 cameras:
-  camera_0:
+  rampa:
     enabled: True
     ffmpeg:
       inputs:
@@ -17,7 +17,7 @@ cameras:
           roles:
             - record
       hwaccel_args: preset-nvidia-h264
-  camera_1:
+  garagem:
     enabled: True
     ffmpeg:
       inputs:
@@ -28,7 +28,7 @@ cameras:
           roles:
             - record
       hwaccel_args: preset-nvidia-h264
-  camera_2:
+  churrasqueira:
     enabled: True
     ffmpeg:
       inputs:
@@ -39,7 +39,7 @@ cameras:
           roles:
             - record
       hwaccel_args: preset-nvidia-h264
-  attic_camera:
+  frente:
     enabled: True
     ffmpeg:
       inputs:
