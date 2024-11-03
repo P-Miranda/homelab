@@ -11,4 +11,6 @@ mosquitto/config/pwfile
 pihole2/etc-dnsmasq.d/*
 pihole2/etc-pihole/*
 
+radicale/data/users
+
 uptime-kuma/uptime-kuma-data/*

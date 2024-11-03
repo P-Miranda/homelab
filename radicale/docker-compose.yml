@@ -1,0 +1,11 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  app:
+    image: cupcakearmy/radicale:1
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    ports:
+      - 5232:5232
