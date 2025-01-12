@@ -27,3 +27,16 @@ docker exec -it <container id> bash
     - Note: needs to be in same folder as the respective `docker-compose.yml`
       file
 - Stop docker compose daemon: `docker compose down`
+
+## Remove HDD from system
+- remove HDD using UI, datacenter -> storage (needs 2 steps, unused and remove)
+- if after that, the proxmox still takes a long time during boot waiting for
+  the HDD:
+    - check `/etc/systemd/system/*.mount` for a service to start that HDD on
+      boot
+    - disable service and remove it:
+    ```bash
+    systemctl disable [hdd-ref].mount
+    rm /etc/systemd/system/[hdd-ref].moutn
+    ```
+
