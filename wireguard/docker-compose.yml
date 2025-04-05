@@ -12,7 +12,7 @@ services:
       - WG_HOST=pmirandahome.duckdns.org
 
       # Optional:
-      - PASSWORD=${WG_PASSWORD}
+      - PASSWORD_HASH=$$2a$$12$$C5TBqx1yTyIVenyxWK8T0uQID.h3vE4epza5dxjQvC9am6DHa6.li
       # - WG_PORT=51820
       # - WG_DEFAULT_ADDRESS=10.8.0.x
       - WG_DEFAULT_DNS=192.168.1.11
