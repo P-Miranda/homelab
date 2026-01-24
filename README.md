@@ -8,14 +8,13 @@ Repository for homelab configurations and other self-hosted things.
 - [network] ddns: dynamic DNS script with cronjob
 - [frigate] frigate: home surveillance: live, recording, event notifications
     - lxc with gpu access
-- [Main-VM] gotify: simple notifications
 - [Main-VM] home-assistant: frigate event notifications and app for user access
 - [Main-VM] immich: photo and video management
 - [Main-VM] mosquitto: mqtt server: frigate event -> mqtt -> home assistant
 - [network] pihole: dhcp server + dns synchole (main)
 - [rpi] pihole2: dhcp server + dns synchole (secondary)
 - [Main-VM] radicale: calDAV + CardDAV server (calendar + contacts)
-- [Main-VM] uptime-kuma: check services uptime, gotify notifications
+- [Main-VM] uptime-kuma: check services uptime
 - [network] wireguard: VPN for access outside home network, dynamic dns
 
 # Docker 
