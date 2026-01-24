@@ -22,3 +22,21 @@ NOTE: bcrypt hashes are different each time due to random salt.
 # Clients
 - Desktop: use thunderbird
 - Android: DAVx5 + simple calendar?
+
+# Import Google Calendar
+1. Create Radicale Calendar
+- Get corresponding folder in ./data/collection-root/[user]/[calendar-id]
+2. Get Google Calendar:
+- Go to Google Calendar > Select Calendar > Settings > Integrate Calendar
+    > Secret address in iCal format
+3. Copy and edit env from template:
+```bash
+cp .env.example .env
+[edit .env]
+```
+4. Run sync script periodicaly
+- Edit crontab: `crontab -e`
+- Add new cronjob:
+```
+0 * * * * /path/to/homelab/radicale/sync_gcal.sh >/dev/null 2>&1
+```
