@@ -1,12 +1,12 @@
 mqtt:
-  enabled: True
+  enabled: true
   host: 192.168.1.12
   user: ${FRIGATE_MQTT_USER}
   password: ${FRIGATE_MQTT_PASSWORD}
 
 cameras:
   rampa:
-    enabled: True
+    enabled: true
     ffmpeg:
       inputs:
         - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.20:554/Streaming/Channels/102/
@@ -18,7 +18,7 @@ cameras:
             - record
       hwaccel_args: preset-nvidia-h264
   garagem:
-    enabled: True
+    enabled: true
     ffmpeg:
       inputs:
         - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.21:554/Streaming/Channels/102/
@@ -29,7 +29,7 @@ cameras:
             - record
       hwaccel_args: preset-nvidia-h264
   churrasqueira:
-    enabled: True
+    enabled: true
     ffmpeg:
       inputs:
         - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.22:554/Streaming/Channels/102/
@@ -40,7 +40,7 @@ cameras:
             - record
       hwaccel_args: preset-nvidia-h264
   frente:
-    enabled: True
+    enabled: true
     ffmpeg:
       inputs:
         - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.2.23:554/Streaming/Channels/102/
@@ -51,45 +51,48 @@ cameras:
             - record
       hwaccel_args: preset-nvidia-h264
 
+detect:
+  enabled: true
+
+motion:
+  enabled: true
+
 detectors:
-  tensorrt:
-    type: tensorrt
-    device: 0 #This is the default, select the first GPU
+  onnx:
+    type: onnx
 
 record:
-  enabled: True
-  retain:
-    days: 3
-    mode: all
-  events:
-    objects:
-      - person
-      - bicycle
-      - car
-      - motorcycle
-      - dog
-      - hat
-      - backpack
-      - umbrella
-      - handbag
-      - suitcase
+  enabled: true
+  continuous:
+    days: 6
+  motion:
+    days: 6
+  alerts:
     retain:
-      default: 30
-      mode: motion
+      days: 30
+      mode: all
+  detections:
+    retain:
+      days: 30
+      mode: all
 
 snapshots:
-  enabled: True
+  enabled: true
+  timestamp: true
 
 timestamp_style:
-  position: "bl" # bottom left
-  format: "%Y/%m/%d - %H:%M:%S" # Year/Month/Day - Hour:Min:Sec
+  position: bl   # bottom left
+  format: '%Y/%m/%d - %H:%M:%S' # Year/Month/Day - Hour:Min:Sec
 
 model:
-  path: /config/model_cache/tensorrt/yolov7-320.trt
-  input_tensor: nchw
-  input_pixel_format: rgb
+  model_type: yolo-generic
   width: 320
   height: 320
+  input_tensor: nchw
+  input_dtype: float
+  path: /config/model_cache/yolov9-t-320.onnx
+  labelmap_path: /labelmap/coco-80.txt
 
 birdseye:
   mode: continuous # all cameras, always
+version: 0.18-0
